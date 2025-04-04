@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc
+from dash import html, dcc
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import pages
@@ -36,4 +36,4 @@ def show_page(pathname):
     else:
         return html.P('404: Not found')
 
-app.run(debug=True)
+app.run(debug=False, port=8080, host='0.0.0.0')
