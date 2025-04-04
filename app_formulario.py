@@ -5,8 +5,11 @@ import pandas as pd
 import numpy as np
 import joblib
 
-app = Dash(__name__, 
-           external_stylesheets=[dbc.themes.BOOTSTRAP])
+#Carregar o modelo treinado
+modelo = joblib.load('models/modelo_heart_disease.pkl')
+medianas = joblib.load('models/medianas_heart_disease.pkl')
+
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 formulario = dbc.Container([
         dbc.Row([
@@ -146,12 +149,14 @@ def prever(n_clicks, age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang,
     if n_clicks == 0:
         return ''
     
-    modelo = joblib.load('modelo_heart_disease.pkl')
+    
     entrada_usuario = pd.DataFrame(
     data = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]],
     columns = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
     )
-
+    
+    # Se a entrada for vazia, preencher com a medianas dos dados
+    entrada_usuario.fillna(medianas, inplace=True)
     # oldpeak é float
     entrada_usuario['oldpeak'] = entrada_usuario['oldpeak'].astype(float)
 

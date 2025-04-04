@@ -26,3 +26,6 @@ print(f'Acurácia do modelo: {acuracia:.2%}')
 
 # Salvar o modelo treinado
 joblib.dump(modelo, 'modelo_heart_disease.pkl')
+
+medianas = X.median()
+joblib.dump(medianas, 'medianas_heart_disease.pkl') 
