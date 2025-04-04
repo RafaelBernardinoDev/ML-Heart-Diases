@@ -1,8 +1,7 @@
-from dash import Dash, dcc, html
+from dash import Dash, html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import pandas as pd
-import numpy as np
 import joblib
 
 #Carregar o modelo treinado
